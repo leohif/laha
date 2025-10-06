@@ -1,44 +1,46 @@
 import { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useUserRole } from '@/providers/UserRoleProvider';
 import { Calendar, User, Settings, BookOpen } from 'lucide-react';
 import Navigation from '@/components/Navigation';
 import type { BookingWithDetails } from '../../shared/types';
-import { useApi } from '@/hooks/useApi';
+import { useAuth } from '@/providers/AuthProvider';
+import { bookingService } from '@/services/bookingService';
+import { userService } from '@/services/userService';
 
 export default function UserProfile() {
   const { t } = useTranslation();
-  const user = null;
-  const { userRole, setUserRole } = useUserRole();
+  const { user } = useAuth();
+  const [userRole, setUserRole] = useState<'user' | 'expert' | null>(null);
   const [bookings, setBookings] = useState<BookingWithDetails[]>([]);
   const [loading, setLoading] = useState(true);
-  const { apiFetch } = useApi();
 
   useEffect(() => {
     if (user) {
-      fetchBookings();
+      fetchUserData();
     }
   }, [user]);
 
-  const fetchBookings = async () => {
+  const fetchUserData = async () => {
     try {
-      const data = await apiFetch('/api/bookings/user');
-      setBookings(data);
+      const [roleData, bookingsData] = await Promise.all([
+        userService.getUserRole(),
+        bookingService.getUserBookings()
+      ]);
+      setUserRole(roleData.role);
+      setBookings(bookingsData);
     } catch (error) {
-      console.error('Error fetching bookings:', error);
+      console.error('Error fetching user data:', error);
     } finally {
       setLoading(false);
     }
   };
 
+
   const handleCancelBooking = async (bookingId: number) => {
     if (!confirm('Are you sure you want to cancel this booking?')) return;
 
     try {
-      await apiFetch(`/api/bookings/${bookingId}`, {
-        method: 'DELETE',
-      });
-      
+      await bookingService.cancelBooking(bookingId);
       setBookings(bookings.filter(b => b.id !== bookingId));
     } catch (error) {
       console.error('Error canceling booking:', error);
@@ -46,7 +48,12 @@ export default function UserProfile() {
   };
 
   const handleRoleChange = async (newRole: 'user' | 'expert') => {
-    await setUserRole(newRole);
+    try {
+      await userService.setUserRole(newRole);
+      setUserRole(newRole);
+    } catch (error) {
+      console.error('Error updating role:', error);
+    }
   };
 
   if (!user) {
@@ -74,7 +81,7 @@ export default function UserProfile() {
               <User className="h-10 w-10 text-white" />
             </div>
             <div>
-              <h1 className="text-2xl font-bold text-gray-900">{user.google_user_data?.name || user.email}</h1>
+              <h1 className="text-2xl font-bold text-gray-900">{user.email}</h1>
               <p className="text-gray-600">{user.email}</p>
               <div className="mt-2">
                 <span className={`inline-flex items-center px-3 py-1 rounded-full text-sm font-medium ${

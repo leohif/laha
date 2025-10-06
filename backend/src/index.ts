@@ -26,13 +26,18 @@ const app = new Hono<HonoEnv>();
 // Enable CORS
 app.use("*", cors({
   origin: (origin) => origin,
-  allowHeaders: ["Content-Type", "Authorization"],
-  allowMethods: ["GET", "POST", "PUT", "DELETE"],
+  allowHeaders: ["Content-Type", "Authorization", "X-Client-Info", "Apikey"],
+  allowMethods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
   credentials: true,
 }));
 
 // Inject the Supabase client into the context for ALL routes
 app.use(supabaseClientMiddleware);
+
+// Health check endpoint
+app.get('/health', (c) => {
+  return c.json({ status: 'ok', timestamp: new Date().toISOString() });
+});
 
 
 // --- AUTH/SESSION ENDPOINT ---
@@ -414,6 +419,12 @@ app.get('/api/availability/:expertId/:serviceId/:date', async (c) => {
   }
 
   return c.json(slots);
+});
+
+// Error handler
+app.onError((err, c) => {
+  console.error('Server error:', err);
+  return c.json({ error: 'Internal server error' }, 500);
 });
 
 export default app;

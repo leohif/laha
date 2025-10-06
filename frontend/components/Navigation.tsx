@@ -1,12 +1,10 @@
 import { useTranslation } from 'react-i18next';
 import { Link, useLocation } from 'react-router';
-import { useUserRole } from '@/providers/UserRoleProvider';
 import { Home, Calendar, User, Menu, X } from 'lucide-react';
 import { useState } from 'react';
 
 export default function Navigation() {
   const { t } = useTranslation();
-  const { userRole } = useUserRole();
   const location = useLocation();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
@@ -15,7 +13,6 @@ export default function Navigation() {
   const navItems = [
     { path: '/', label: t('navigation.home'), icon: Home },
     { path: '/services', label: t('navigation.services'), icon: Calendar },
-    ...(userRole === 'expert' ? [{ path: '/expert/dashboard', label: t('navigation.dashboard'), icon: Calendar }] : []),
     { path: '/profile', label: t('navigation.profile'), icon: User },
   ];
 

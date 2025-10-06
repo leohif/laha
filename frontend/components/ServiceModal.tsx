@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { X } from 'lucide-react';
 import type { Service } from '../../shared/types';
+import { serviceService } from '@/services/serviceService';
 
 interface ServiceModalProps {
   service?: Service | null;
@@ -38,23 +39,12 @@ export default function ServiceModal({ service, onClose, onSaved }: ServiceModal
 
     setLoading(true);
     try {
-      const url = service ? `/api/services/${service.id}` : '/api/services';
-      const method = service ? 'PUT' : 'POST';
-      
-      const response = await fetch(url, {
-        method,
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
-      });
-
-      if (response.ok) {
-        onSaved();
+      if (service) {
+        await serviceService.updateService(service.id, formData);
       } else {
-        const error = await response.json();
-        console.error('Failed to save service:', error);
+        await serviceService.createService(formData);
       }
+      onSaved();
     } catch (error) {
       console.error('Error saving service:', error);
     } finally {

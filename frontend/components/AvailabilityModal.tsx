@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { X, Clock } from 'lucide-react';
 import type { Availability } from '../../shared/types';
+import { availabilityService } from '@/services/availabilityService';
 
 interface AvailabilityModalProps {
   currentAvailability: Availability[];
@@ -59,30 +60,19 @@ export default function AvailabilityModal({ currentAvailability, onClose, onSave
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     const enabledSlots = availability.filter(slot => slot.enabled);
-    
+
     setLoading(true);
     try {
-      const response = await fetch('/api/availability', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          availability: enabledSlots.map(slot => ({
-            day_of_week: slot.day_of_week,
-            start_time: slot.start_time,
-            end_time: slot.end_time,
-          }))
-        }),
+      await availabilityService.setAvailability({
+        availability: enabledSlots.map(slot => ({
+          day_of_week: slot.day_of_week,
+          start_time: slot.start_time,
+          end_time: slot.end_time,
+        }))
       });
-
-      if (response.ok) {
-        onSaved();
-      } else {
-        console.error('Failed to save availability');
-      }
+      onSaved();
     } catch (error) {
       console.error('Error saving availability:', error);
     } finally {

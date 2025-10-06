@@ -1,15 +1,18 @@
 import { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Navigate } from 'react-router';
 import { Plus, Calendar, DollarSign, Clock, Users } from 'lucide-react';
 import Navigation from '@/components/Navigation';
 import ServiceModal from '@/components/ServiceModal';
 import AvailabilityModal from '@/components/AvailabilityModal';
 import type { Service, BookingWithDetails, Availability } from '../../shared/types';
-import { useApi } from '@/hooks/useApi';
+import { useAuth } from '@/providers/AuthProvider';
+import { serviceService } from '@/services/serviceService';
+import { bookingService } from '@/services/bookingService';
+import { availabilityService } from '@/services/availabilityService';
 
 export default function ExpertDashboard() {
   const { t } = useTranslation();
+  const { user } = useAuth();
   const [services, setServices] = useState<Service[]>([]);
   const [bookings, setBookings] = useState<BookingWithDetails[]>([]);
   const [availability, setAvailability] = useState<Availability[]>([]);
@@ -17,18 +20,19 @@ export default function ExpertDashboard() {
   const [showServiceModal, setShowServiceModal] = useState(false);
   const [showAvailabilityModal, setShowAvailabilityModal] = useState(false);
   const [editingService, setEditingService] = useState<Service | null>(null);
-  const { apiFetch } = useApi();
 
   useEffect(() => {
     fetchData();
   }, []);
 
   const fetchData = async () => {
+    if (!user) return;
+
     try {
       const [servicesData, bookingsData, availabilityData] = await Promise.all([
-        apiFetch(`/api/experts/me/services`),
-        apiFetch('/api/bookings/expert'),
-        apiFetch(`/api/availability/me`)
+        serviceService.getExpertServices(user.id),
+        bookingService.getExpertBookings(),
+        availabilityService.getExpertAvailability(user.id)
       ]);
 
       setServices(servicesData);
@@ -45,10 +49,7 @@ export default function ExpertDashboard() {
     if (!confirm('Are you sure you want to delete this service?')) return;
 
     try {
-      await apiFetch(`/api/services/${serviceId}`, {
-        method: 'DELETE',
-      });
-      
+      await serviceService.deleteService(serviceId);
       setServices(services.filter(s => s.id !== serviceId));
     } catch (error) {
       console.error('Error deleting service:', error);

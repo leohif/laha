@@ -1,14 +1,13 @@
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router';
-
-import { useUserRole } from '@/providers/UserRoleProvider';
 import { Calendar, Star, Users, Globe } from 'lucide-react';
 import Navigation from '@/components/Navigation';
+import { useAuth } from '@/providers/AuthProvider';
 
 export default function HomePage() {
   const { t, i18n } = useTranslation();
-  const user = null;
-  const { userRole } = useUserRole();
+  const { user } = useAuth();
+  const userRole = null;
 
   const changeLanguage = (lng: string) => {
     i18n.changeLanguage(lng);

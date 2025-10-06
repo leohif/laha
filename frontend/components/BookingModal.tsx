@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { X, Calendar, Clock } from 'lucide-react';
 import type { ServiceWithExpert } from '../../shared/types';
+import { bookingService } from '@/services/bookingService';
 
 interface BookingModalProps {
   service: ServiceWithExpert;
@@ -25,12 +26,13 @@ export default function BookingModal({ service, onClose }: BookingModalProps) {
   const fetchAvailableSlots = async () => {
     setLoading(true);
     try {
-      const response = await fetch(`/api/availability/${service.expert_id}/${service.id}/${selectedDate}`);
-      if (response.ok) {
-        const slots = await response.json();
-        setAvailableSlots(slots);
-        setSelectedTime('');
-      }
+      const slots = await bookingService.getAvailableSlots(
+        service.expert_id,
+        service.id,
+        selectedDate
+      );
+      setAvailableSlots(slots);
+      setSelectedTime('');
     } catch (error) {
       console.error('Error fetching available slots:', error);
     } finally {
@@ -43,25 +45,13 @@ export default function BookingModal({ service, onClose }: BookingModalProps) {
 
     setLoading(true);
     try {
-      const response = await fetch('/api/bookings', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          expert_id: service.expert_id,
-          service_id: service.id,
-          booking_date: selectedDate,
-          booking_time: selectedTime,
-        }),
+      await bookingService.createBooking({
+        expert_id: service.expert_id,
+        service_id: service.id,
+        booking_date: selectedDate,
+        booking_time: selectedTime,
       });
-
-      if (response.ok) {
-        setBookingConfirmed(true);
-      } else {
-        const error = await response.json();
-        alert(error.error || 'Failed to book appointment');
-      }
+      setBookingConfirmed(true);
     } catch (error) {
       console.error('Error booking appointment:', error);
       alert('Failed to book appointment');

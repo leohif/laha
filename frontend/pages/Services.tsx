@@ -4,16 +4,16 @@ import { Clock, DollarSign } from 'lucide-react';
 import Navigation from '@/components/Navigation';
 import BookingModal from '@/components/BookingModal';
 import type { ServiceWithExpert } from '../../shared/types';
-import { useApi } from '@/hooks/useApi';
+import { useAuth } from '@/providers/AuthProvider';
+import { serviceService } from '@/services/serviceService';
 
 export default function ServicesPage() {
   const { t } = useTranslation();
-  const user = null;
+  const { user } = useAuth();
   const [services, setServices] = useState<ServiceWithExpert[]>([]);
   const [loading, setLoading] = useState(true);
   const [selectedService, setSelectedService] = useState<ServiceWithExpert | null>(null);
   const [showBookingModal, setShowBookingModal] = useState(false);
-  const { apiFetch } = useApi();
 
   useEffect(() => {
     fetchServices();
@@ -21,7 +21,7 @@ export default function ServicesPage() {
 
   const fetchServices = async () => {
     try {
-      const data = await apiFetch('/api/services');
+      const data = await serviceService.getAllServices();
       setServices(data);
     } catch (error) {
       console.error('Error fetching services:', error);
