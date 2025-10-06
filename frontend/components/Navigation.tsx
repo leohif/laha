@@ -1,6 +1,6 @@
 import { useTranslation } from 'react-i18next';
 import { Link, useLocation } from 'react-router';
-import { Home, Calendar, User, Menu, X } from 'lucide-react';
+import { Chrome as Home, Calendar, User, Menu, X } from 'lucide-react';
 import { useState } from 'react';
 
 export default function Navigation() {
