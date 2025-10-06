@@ -1,0 +1,77 @@
+{
+  "common": {
+    "loading": "Cargando...",
+    "save": "Guardar",
+    "cancel": "Cancelar",
+    "delete": "Eliminar",
+    "edit": "Editar",
+    "create": "Crear",
+    "back": "Volver",
+    "next": "Siguiente",
+    "previous": "Anterior",
+    "confirm": "Confirmar",
+    "close": "Cerrar"
+  },
+  "auth": {
+    "login": "Iniciar sesión",
+    "logout": "Cerrar sesión",
+    "loginWithGoogle": "Iniciar sesión con Google",
+    "welcome": "Bienvenido a Laha",
+    "chooseRole": "Elige tu rol",
+    "iAmUser": "Busco servicios de expertos",
+    "iAmExpert": "Soy un experto que ofrece servicios"
+  },
+  "navigation": {
+    "home": "Inicio",
+    "dashboard": "Panel",
+    "profile": "Perfil",
+    "services": "Servicios",
+    "bookings": "Reservas"
+  },
+  "home": {
+    "title": "Encuentra Servicios de Expertos",
+    "subtitle": "Conecta con profesionales y reserva citas fácilmente",
+    "findExperts": "Encontrar Expertos",
+    "becomeExpert": "Convertirse en Experto"
+  },
+  "expert": {
+    "dashboard": "Panel de Experto",
+    "services": "Mis Servicios",
+    "availability": "Disponibilidad",
+    "bookings": "Reservas",
+    "addService": "Agregar Nuevo Servicio",
+    "editService": "Editar Servicio",
+    "serviceName": "Nombre del Servicio",
+    "servicePrice": "Precio",
+    "serviceDuration": "Duración (minutos)",
+    "serviceDescription": "Descripción",
+    "noServices": "No hay servicios creados aún",
+    "setAvailability": "Configurar Disponibilidad",
+    "workingHours": "Horario de Trabajo",
+    "selectDays": "Selecciona días y horarios de trabajo"
+  },
+  "user": {
+    "profile": "Mi Perfil",
+    "myBookings": "Mis Reservas",
+    "noBookings": "No hay reservas aún",
+    "bookingWith": "Reserva con",
+    "cancelBooking": "Cancelar Reserva"
+  },
+  "booking": {
+    "bookNow": "Reservar Ahora",
+    "selectDateTime": "Seleccionar Fecha y Hora",
+    "availableSlots": "Horarios Disponibles",
+    "confirmBooking": "Confirmar Reserva",
+    "bookingConfirmed": "¡Reserva Confirmada!",
+    "noAvailableSlots": "No hay horarios disponibles para esta fecha"
+  },
+  "days": {
+    "monday": "Lunes",
+    "tuesday": "Martes",
+    "wednesday": "Miércoles",
+    "thursday": "Jueves",
+    "friday": "Viernes",
+    "saturday": "Sábado",
+    "sunday": "Domingo"
+  }
+}

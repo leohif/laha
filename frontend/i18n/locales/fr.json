@@ -1,0 +1,77 @@
+{
+  "common": {
+    "loading": "Chargement...",
+    "save": "Sauvegarder",
+    "cancel": "Annuler",
+    "delete": "Supprimer",
+    "edit": "Modifier",
+    "create": "Créer",
+    "back": "Retour",
+    "next": "Suivant",
+    "previous": "Précédent",
+    "confirm": "Confirmer",
+    "close": "Fermer"
+  },
+  "auth": {
+    "login": "Se connecter",
+    "logout": "Se déconnecter",
+    "loginWithGoogle": "Se connecter avec Google",
+    "welcome": "Bienvenue sur Laha",
+    "chooseRole": "Choisissez votre rôle",
+    "iAmUser": "Je cherche des services d'experts",
+    "iAmExpert": "Je suis un expert offrant des services"
+  },
+  "navigation": {
+    "home": "Accueil",
+    "dashboard": "Tableau de bord",
+    "profile": "Profil",
+    "services": "Services",
+    "bookings": "Réservations"
+  },
+  "home": {
+    "title": "Trouvez des Services d'Experts",
+    "subtitle": "Connectez-vous avec des professionnels et réservez des rendez-vous facilement",
+    "findExperts": "Trouver des Experts",
+    "becomeExpert": "Devenir Expert"
+  },
+  "expert": {
+    "dashboard": "Tableau de Bord Expert",
+    "services": "Mes Services",
+    "availability": "Disponibilité",
+    "bookings": "Réservations",
+    "addService": "Ajouter un Nouveau Service",
+    "editService": "Modifier le Service",
+    "serviceName": "Nom du Service",
+    "servicePrice": "Prix",
+    "serviceDuration": "Durée (minutes)",
+    "serviceDescription": "Description",
+    "noServices": "Aucun service créé encore",
+    "setAvailability": "Définir la Disponibilité",
+    "workingHours": "Heures de Travail",
+    "selectDays": "Sélectionnez les jours et heures de travail"
+  },
+  "user": {
+    "profile": "Mon Profil",
+    "myBookings": "Mes Réservations",
+    "noBookings": "Aucune réservation encore",
+    "bookingWith": "Réservation avec",
+    "cancelBooking": "Annuler la Réservation"
+  },
+  "booking": {
+    "bookNow": "Réserver Maintenant",
+    "selectDateTime": "Sélectionner Date et Heure",
+    "availableSlots": "Créneaux Disponibles",
+    "confirmBooking": "Confirmer la Réservation",
+    "bookingConfirmed": "Réservation Confirmée!",
+    "noAvailableSlots": "Aucun créneau disponible pour cette date"
+  },
+  "days": {
+    "monday": "Lundi",
+    "tuesday": "Mardi",
+    "wednesday": "Mercredi",
+    "thursday": "Jeudi",
+    "friday": "Vendredi",
+    "saturday": "Samedi",
+    "sunday": "Dimanche"
+  }
+}

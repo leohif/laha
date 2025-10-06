@@ -1,0 +1,77 @@
+{
+  "common": {
+    "loading": "Loading...",
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "edit": "Edit",
+    "create": "Create",
+    "back": "Back",
+    "next": "Next",
+    "previous": "Previous",
+    "confirm": "Confirm",
+    "close": "Close"
+  },
+  "auth": {
+    "login": "Login",
+    "logout": "Logout",
+    "loginWithGoogle": "Login with Google",
+    "welcome": "Welcome to Laha",
+    "chooseRole": "Choose your role",
+    "iAmUser": "I'm looking for expert services",
+    "iAmExpert": "I'm an expert offering services"
+  },
+  "navigation": {
+    "home": "Home",
+    "dashboard": "Dashboard",
+    "profile": "Profile",
+    "services": "Services",
+    "bookings": "Bookings"
+  },
+  "home": {
+    "title": "Find Expert Services",
+    "subtitle": "Connect with professionals and book appointments seamlessly",
+    "findExperts": "Find Experts",
+    "becomeExpert": "Become an Expert"
+  },
+  "expert": {
+    "dashboard": "Expert Dashboard",
+    "services": "My Services",
+    "availability": "Availability",
+    "bookings": "Bookings",
+    "addService": "Add New Service",
+    "editService": "Edit Service",
+    "serviceName": "Service Name",
+    "servicePrice": "Price",
+    "serviceDuration": "Duration (minutes)",
+    "serviceDescription": "Description",
+    "noServices": "No services created yet",
+    "setAvailability": "Set Availability",
+    "workingHours": "Working Hours",
+    "selectDays": "Select working days and hours"
+  },
+  "user": {
+    "profile": "My Profile",
+    "myBookings": "My Bookings",
+    "noBookings": "No bookings yet",
+    "bookingWith": "Booking with",
+    "cancelBooking": "Cancel Booking"
+  },
+  "booking": {
+    "bookNow": "Book Now",
+    "selectDateTime": "Select Date & Time",
+    "availableSlots": "Available Slots",
+    "confirmBooking": "Confirm Booking",
+    "bookingConfirmed": "Booking Confirmed!",
+    "noAvailableSlots": "No available slots for this date"
+  },
+  "days": {
+    "monday": "Monday",
+    "tuesday": "Tuesday",
+    "wednesday": "Wednesday",
+    "thursday": "Thursday",
+    "friday": "Friday",
+    "saturday": "Saturday",
+    "sunday": "Sunday"
+  }
+}
